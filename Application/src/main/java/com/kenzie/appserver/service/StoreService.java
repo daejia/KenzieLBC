@@ -5,6 +5,9 @@ import com.kenzie.appserver.repositories.model.StoreRecord;
 import com.kenzie.appserver.service.model.Store;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class StoreService {
     private StoreRepository storeRepository;
@@ -31,5 +34,22 @@ public Store findById(String id) {
         storeRecord.setIsInRadius(store.isInRadius());
         storeRepository.save(storeRecord);
         return store;
+    }
+
+    public List<Store> findAllStores() {
+        List<Store> stores = new ArrayList<>();
+
+        Iterable<StoreRecord> concertIterator = storeRepository.findAll();
+        for(StoreRecord record : concertIterator) {
+            stores.add(new Store(record.getId(),
+                    record.getName(),
+                    record.getAddress(),
+                    record.getCity(),
+                    record.getState(),
+                    record.getZip(),
+                    record.isInRadius()));
+        }
+
+        return stores;
     }
 }

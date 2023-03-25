@@ -1,5 +1,7 @@
 package com.kenzie.appserver.repositories.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.google.common.base.Objects;
 
 public class StoreRecord {
@@ -11,6 +13,7 @@ public class StoreRecord {
     private String zip;
     private boolean isInRadius;
 
+    @DynamoDBHashKey(attributeName = "Id")
     public String getId() {
         return id;
     }
@@ -19,6 +22,7 @@ public class StoreRecord {
         this.id = id;
     }
 
+    @DynamoDBAttribute(attributeName = "Name")
     public String getName() {
         return name;
     }
@@ -27,6 +31,7 @@ public class StoreRecord {
         this.name = name;
     }
 
+    @DynamoDBAttribute(attributeName = "Address")
     public String getAddress() {
         return address;
     }
@@ -35,6 +40,7 @@ public class StoreRecord {
         this.address = address;
     }
 
+    @DynamoDBAttribute(attributeName = "City")
     public String getCity() {
         return city;
     }
@@ -43,6 +49,7 @@ public class StoreRecord {
         this.city = city;
     }
 
+    @DynamoDBAttribute(attributeName = "State")
     public String getState() {
         return state;
     }
@@ -51,6 +58,7 @@ public class StoreRecord {
         this.state = state;
     }
 
+    @DynamoDBAttribute(attributeName = "Zip")
     public String getZip() {
         return zip;
     }
@@ -59,6 +67,7 @@ public class StoreRecord {
         this.zip = zip;
     }
 
+    @DynamoDBAttribute(attributeName = "IsInRadius")
     public boolean isInRadius() {
         return isInRadius;
     }

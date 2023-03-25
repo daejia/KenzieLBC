@@ -14,9 +14,7 @@ public class StoreCreateRequest {
     private String zip;
     private boolean isInRadius;
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
     public String getAddress() {
         return address;

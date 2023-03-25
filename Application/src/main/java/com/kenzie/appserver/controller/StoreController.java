@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.UUID.randomUUID;
 
@@ -32,8 +34,21 @@ public class StoreController {
         return ResponseEntity.ok(storeResponse);
     }
 
+    @GetMapping
+    public ResponseEntity<List<StoreResponse>> getAllStores() {
+        List<Store> stores = storeService.findAllStores();
+        if (stores == null || stores.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        List<StoreResponse> response = new ArrayList<>();
+        for (Store store : stores) {
+            response.add(this.createStoreResponse(store));
+        }
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
-    public ResponseEntity<StoreResponse> addNewConcert(@RequestBody StoreCreateRequest storeCreateRequest) {
+    public ResponseEntity<StoreResponse> addNewStore(@RequestBody StoreCreateRequest storeCreateRequest) {
         Store store = new Store(randomUUID().toString(),
                 storeCreateRequest.getName(), storeCreateRequest.getAddress(), storeCreateRequest.getCity(),
                 storeCreateRequest.getState(), storeCreateRequest.getZip(), storeCreateRequest.getIsInRadius());
