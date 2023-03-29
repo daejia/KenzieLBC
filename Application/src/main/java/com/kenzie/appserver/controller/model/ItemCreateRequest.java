@@ -2,6 +2,7 @@ package com.kenzie.appserver.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kenzie.appserver.service.model.BrandType;
+import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.Store;
 import javax.validation.constraints.NotEmpty;
 
@@ -11,7 +12,7 @@ public class ItemCreateRequest {
     private String name;
     private Store store;
     private BrandType brandType;
-    private String category;
+    private Category category;
     private double price;
     private boolean isInStock;
 
@@ -39,11 +40,11 @@ public class ItemCreateRequest {
         this.brandType = brandType;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

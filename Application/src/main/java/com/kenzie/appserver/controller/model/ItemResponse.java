@@ -2,6 +2,7 @@ package com.kenzie.appserver.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.kenzie.appserver.service.model.BrandType;
+import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.Store;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -9,7 +10,7 @@ public class ItemResponse {
     private String id;
     private Store store;
     private String name;
-    private String category;
+    private Category category;
     private BrandType brandType;
     private double price;
     private boolean isInStock;
@@ -38,11 +39,11 @@ public class ItemResponse {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

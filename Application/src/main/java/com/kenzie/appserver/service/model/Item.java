@@ -5,11 +5,11 @@ public class Item {
     private final Store store;
     private final BrandType brandType;
     private final String name;
-    private final String category;
+    private final Category category;
     private final double price;
     private final boolean isInStock;
 
-    public Item(String id, Store store, BrandType brandType, String name, String category, double price, boolean isInStock) {
+    public Item(String id, Store store, BrandType brandType, String name, Category category, double price, boolean isInStock) {
         this.id = id;
         this.store = store;
         this.brandType = brandType;
@@ -34,7 +34,7 @@ public class Item {
     public String getName() {
         return name;
     }
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
     public double getPrice() {

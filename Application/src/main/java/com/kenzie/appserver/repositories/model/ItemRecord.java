@@ -5,6 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.google.common.base.Objects;
 import com.kenzie.appserver.service.model.BrandType;
+import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.Store;
 
 public class ItemRecord {
@@ -12,7 +13,7 @@ public class ItemRecord {
     private Store store;
     private String name;
     private BrandType brandType;
-    private String category;
+    private Category category;
     private double price;
     private boolean isInStock;
 
@@ -53,11 +54,11 @@ public class ItemRecord {
     }
 
     @DynamoDBAttribute(attributeName = "Category")
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
