@@ -6,6 +6,7 @@ import com.kenzie.appserver.service.model.Store;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static java.util.UUID.randomUUID;
@@ -52,6 +53,15 @@ class StoreServiceTest {
     }
 
     @Test
-    void addNewStore() {
+    void findById_isInvalid_returnsNull() {
+     //GIVEN
+        String id = randomUUID().toString();
+
+        //WHEN
+        when(storeRepository.findById(id)).thenReturn(Optional.empty());
+        Store store = storeService.findById(id);
+
+        //THEN
+        assertNull(store, "The store is null when not found");
     }
 }
