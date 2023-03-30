@@ -40,7 +40,6 @@ public class Item {
     public double getPrice() {
         return price;
     }
-
     public boolean getIsInStock() {return isInStock;
     }
 }

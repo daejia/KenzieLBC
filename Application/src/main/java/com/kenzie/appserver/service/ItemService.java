@@ -5,6 +5,8 @@ import com.kenzie.appserver.repositories.model.ItemRecord;
 import com.kenzie.appserver.service.model.Item;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemService {
     private ItemRepository itemRepository;
@@ -34,4 +36,19 @@ public class ItemService {
         itemRepository.save(itemRecord);
         return item;
     }
+    public List<Item> getAllCartItems(Long cartId) throws CartNotFoundException {
+        List<Item> items = itemRepository.findByCartId(cartId);
+
+        if (items.isEmpty()) {
+            throw new CartNotFoundException("Cart not found");
+        }
+
+        return items;
 }
+
+    public class CartNotFoundException extends Throwable {
+        public CartNotFoundException(String message) {
+            super(message);
+        }
+    }
+    }

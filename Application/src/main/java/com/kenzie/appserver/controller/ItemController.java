@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 import static java.util.UUID.randomUUID;
 
@@ -46,6 +47,11 @@ public class ItemController {
         ItemResponse itemResponse = createItemResponse(item);
 
         return ResponseEntity.created(URI.create("/item/" + itemResponse.getId())).body(itemResponse);
+    }
+    @GetMapping("/cart/{cartId}/items")
+    public List<Item> getAllCartItems(@PathVariable Long cartId) throws ItemService.CartNotFoundException {
+        List<Item> cartItems = itemService.getAllCartItems(cartId);
+        return cartItems;
     }
 
     private ItemResponse createItemResponse(Item item) {
