@@ -36,19 +36,5 @@ public class ItemService {
         itemRepository.save(itemRecord);
         return item;
     }
-    public List<Item> getAllCartItems(Long cartId) throws CartNotFoundException {
-        List<Item> items = itemRepository.findByCartId(cartId);
 
-        if (items.isEmpty()) {
-            throw new CartNotFoundException("Cart not found");
-        }
-
-        return items;
-}
-
-    public class CartNotFoundException extends Throwable {
-        public CartNotFoundException(String message) {
-            super(message);
-        }
-    }
     }

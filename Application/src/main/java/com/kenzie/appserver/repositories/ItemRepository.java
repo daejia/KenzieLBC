@@ -10,7 +10,5 @@ import java.util.Optional;
 
 @EnableScan
 public interface ItemRepository extends CrudRepository<ItemRecord, String> {
-    Optional<Object> findById(Long cartId);
-
     List<Item> findByCartId(Long cartId);
 }
