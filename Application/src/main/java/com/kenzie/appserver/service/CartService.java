@@ -44,20 +44,20 @@ public class CartService {
         return items;
     }
 
-    public Item getCartItem(Long cartId, String item) throws CartNotFoundException {
-        List<Cart> cartsList = cartRepository.findByCartId(cartId);
-
-        if (cartsList.isEmpty()) {
-            throw new CartNotFoundException("Can not retrieve item, cart does not exist!");
-        }
-
-        for (Cart cart : cartsList) {
-            if (cart.getItems().containsKey(item)) {
-                Item foundItem = cart.getItems().get(item);
-            }
-        }
-        return foundItem;
-    }
+//    public Item getCartItem(Long cartId, String item) throws CartNotFoundException {
+//        List<Cart> cartsList = cartRepository.findByCartId(cartId);
+//
+//        if (cartsList.isEmpty()) {
+//            throw new CartNotFoundException("Can not retrieve item, cart does not exist!");
+//        }
+//
+//        for (Cart cart : cartsList) {
+//            if (cart.getItems().containsKey(item)) {
+//                Item foundItem = cart.getItems().get(item);
+//            }
+//        }
+//        return foundItem;
+//    }
 
     public class CartNotFoundException extends Throwable {
         public CartNotFoundException(String message) {

@@ -2,6 +2,7 @@ package com.kenzie.appserver.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.kenzie.appserver.IntegrationTest;
 import com.kenzie.appserver.controller.model.ExampleCreateRequest;
 import com.kenzie.appserver.service.CartService;
 import com.kenzie.appserver.service.ExampleService;
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@IntegrationTest
 public class CartControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -39,7 +41,7 @@ public class CartControllerTest {
     public void getById_Exists() throws Exception {
         String id = UUID.randomUUID().toString();
         String user = mockNeat.strings().valStr();
-        Map<String, Item> itemMap = new HashMap<>();
+        Map<Item, Integer> itemMap = new HashMap<>();
 
         Cart cart = new Cart(id,user,itemMap);
         Cart persistedCart = cartService.addNewCart(cart);
@@ -72,5 +74,4 @@ public class CartControllerTest {
                         .value(is(name)))
                 .andExpect(status().isCreated());
     }
-}
 }
