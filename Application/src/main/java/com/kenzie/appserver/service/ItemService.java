@@ -36,19 +36,17 @@ public class ItemService {
         itemRepository.save(itemRecord);
         return item;
     }
-    public List<Item> getAllCartItems(Long cartId) throws CartNotFoundException {
-        List<Item> items = itemRepository.findByCartId(cartId);
 
-        if (items.isEmpty()) {
-            throw new CartNotFoundException("Cart not found");
-        }
-
-        return items;
-}
-
-    public class CartNotFoundException extends Throwable {
-        public CartNotFoundException(String message) {
-            super(message);
+    public void updateCartItem(Item item) {
+            ItemRecord itemRecord = new ItemRecord();
+            itemRecord.setId(item.getId());
+            itemRecord.setStore(item.getStore());
+            itemRecord.setBrandType(item.getBrandType());
+            itemRecord.setName(item.getName());
+            itemRecord.setCategory(item.getCategory());
+            itemRecord.setPrice(item.getPrice());
+            itemRecord.setInStock(item.getIsInStock());
+            itemRepository.save(itemRecord);
         }
     }
-    }
+
