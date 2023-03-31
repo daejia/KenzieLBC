@@ -36,7 +36,7 @@ public class CartResponse {
         return items;
     }
 
-    public void setItems(Map<Item, Integer> items) {
+    public void setItems(Map<String, Item> items) {
         this.items = items;
     }
 }

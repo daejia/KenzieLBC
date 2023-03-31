@@ -20,7 +20,7 @@ public class CartService {
     public Cart findById(String id) {
         Cart cartFromBackend = cartRepository
                 .findById(id)
-                .map(cart -> new Cart(cart.getId(), cart.getUser(), (Map<Item, Integer>) cart.getItems()))
+                .map(cart -> new Cart(cart.getId(), cart.getUser(), cart.getItems()))
                 .orElse(null);
 
         return cartFromBackend;
@@ -30,10 +30,11 @@ public class CartService {
         CartRecord cartRecord = new CartRecord();
         cartRecord.setId(cart.getId());
         cartRecord.setUser(cart.getUser());
-        cartRecord.setItems((Map<Item, Integer>) cart.getItems());
+        cartRecord.setItems(cart.getItems());
         cartRepository.save(cartRecord);
         return cart;
     }
+
     public List<Cart> getAllCartItems(Long cartId) throws CartNotFoundException {
         List<Cart> items = cartRepository.findByCartId(cartId);
 
@@ -41,6 +42,21 @@ public class CartService {
             throw new CartService.CartNotFoundException("Cart not found");
         }
         return items;
+    }
+
+    public Item getCartItem(Long cartId, String item) throws CartNotFoundException {
+        List<Cart> cartsList = cartRepository.findByCartId(cartId);
+
+        if (cartsList.isEmpty()) {
+            throw new CartNotFoundException("Can not retrieve item, cart does not exist!");
+        }
+
+        for (Cart cart : cartsList) {
+            if (cart.getItems().containsKey(item)) {
+                Item foundItem = cart.getItems().get(item);
+            }
+        }
+        return foundItem;
     }
 
     public class CartNotFoundException extends Throwable {

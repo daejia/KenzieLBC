@@ -41,7 +41,7 @@ public class CartController {
     }
 
     @PostMapping
-    public ResponseEntity<CartResponse> addNewConcert(@RequestBody CartCreateRequest cartCreateRequest) {
+    public ResponseEntity<CartResponse> addNewCart(@RequestBody CartCreateRequest cartCreateRequest) {
         Cart cart = new Cart(randomUUID().toString(),cartCreateRequest.getUser(),cartCreateRequest.getItems());
         cartService.addNewCart(cart);
 
