@@ -2,8 +2,10 @@ package com.kenzie.appserver.repositories.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.google.common.base.Objects;
 
+@DynamoDBTable(tableName="Store")
 public class StoreRecord {
     private String id;
     private String name;

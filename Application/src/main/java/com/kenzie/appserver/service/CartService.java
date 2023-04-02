@@ -34,14 +34,14 @@ public class CartService {
         cartRepository.save(cartRecord);
         return cart;
     }
-    public List<Cart> getAllCartItems(Long cartId) throws CartNotFoundException {
-        List<Cart> items = cartRepository.findByCartId(cartId);
-
-        if (items.isEmpty()) {
-            throw new CartService.CartNotFoundException("Cart not found");
-        }
-        return items;
-    }
+//    public List<Cart> getAllCartItems(Long cartId) throws CartNotFoundException {
+//        List<Cart> items = cartRepository.findByCartId(cartId);
+//
+//        if (items.isEmpty()) {
+//            throw new CartService.CartNotFoundException("Cart not found");
+//        }
+//        return items;
+//    }
 
     public class CartNotFoundException extends Throwable {
         public CartNotFoundException(String message) {

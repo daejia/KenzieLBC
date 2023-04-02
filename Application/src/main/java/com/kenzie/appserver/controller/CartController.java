@@ -34,11 +34,11 @@ public class CartController {
 
         return ResponseEntity.ok(cartResponse);
     }
-    @GetMapping("/cart/{cartId}/items")
-    public List<Cart> getAllCartItems(@PathVariable Long cartId) throws CartService.CartNotFoundException {
-        List<Cart> cartItems = cartService.getAllCartItems(cartId);
-        return cartItems;
-    }
+//    @GetMapping("/cart/{cartId}/items")
+//    public List<Cart> getAllCartItems(@PathVariable Long cartId) throws CartService.CartNotFoundException {
+//        List<Cart> cartItems = cartService.getAllCartItems(cartId);
+//        return cartItems;
+//    }
 
     @PostMapping
     public ResponseEntity<CartResponse> addNewConcert(@RequestBody CartCreateRequest cartCreateRequest) {
