@@ -5,6 +5,7 @@ import com.kenzie.appserver.controller.model.CartCreateRequest;
 import com.kenzie.appserver.controller.model.CartResponse;
 import com.kenzie.appserver.service.CartService;
 import com.kenzie.appserver.service.model.Cart;
+import com.kenzie.appserver.service.model.Item;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,14 +35,15 @@ public class CartController {
 
         return ResponseEntity.ok(cartResponse);
     }
-//    @GetMapping("/cart/{cartId}/items")
-//    public List<Cart> getAllCartItems(@PathVariable Long cartId) throws CartService.CartNotFoundException {
-//        List<Cart> cartItems = cartService.getAllCartItems(cartId);
-//        return cartItems;
-//    }
+
+    @GetMapping("/cart/{cartId}/items")
+    public List<Item> getAllCartItems(@PathVariable String cartId) throws CartService.CartNotFoundException {
+        List<Item> cartItems = cartService.getAllCartItems(cartId);
+        return cartItems;
+    }
 
     @PostMapping
-    public ResponseEntity<CartResponse> addNewConcert(@RequestBody CartCreateRequest cartCreateRequest) {
+    public ResponseEntity<CartResponse> addNewCart(@RequestBody CartCreateRequest cartCreateRequest) {
         Cart cart = new Cart(randomUUID().toString(),cartCreateRequest.getUser(),cartCreateRequest.getItems());
         cartService.addNewCart(cart);
 

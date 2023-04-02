@@ -4,8 +4,10 @@ import com.kenzie.appserver.repositories.CartRepository;
 import com.kenzie.appserver.repositories.model.CartRecord;
 import com.kenzie.appserver.service.model.Cart;
 import com.kenzie.appserver.service.model.Item;
+import com.sun.tools.javac.jvm.Items;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +22,7 @@ public class CartService {
     public Cart findById(String id) {
         Cart cartFromBackend = cartRepository
                 .findById(id)
-                .map(cart -> new Cart(cart.getId(), cart.getUser(), (Map<Item, Integer>) cart.getItems()))
+                .map(cart -> new Cart(cart.getId(), cart.getUser(), cart.getItems()))
                 .orElse(null);
 
         return cartFromBackend;
@@ -30,18 +32,33 @@ public class CartService {
         CartRecord cartRecord = new CartRecord();
         cartRecord.setId(cart.getId());
         cartRecord.setUser(cart.getUser());
-        cartRecord.setItems((Map<Item, Integer>) cart.getItems());
+        cartRecord.setItems(cart.getItems());
         cartRepository.save(cartRecord);
         return cart;
     }
-//    public List<Cart> getAllCartItems(Long cartId) throws CartNotFoundException {
-//        List<Cart> items = cartRepository.findByCartId(cartId);
-//
-//        if (items.isEmpty()) {
-//            throw new CartService.CartNotFoundException("Cart not found");
-//        }
-//        return items;
-//    }
+
+    public List<Item> getAllCartItems(String cartId) throws CartNotFoundException {
+        Cart cart = this.findById(cartId);
+        if (cart == null){
+            throw new CartService.CartNotFoundException("Cart not found");
+        }
+        List<Item> items = new ArrayList<>();
+        for (Item item : cart.getItems().values()){
+            items.add(item);
+        }
+        if (items.isEmpty()) {
+            throw new CartService.CartNotFoundException("Add items to your cart!");
+        }
+        return items;
+    }
+
+    public Item getCartItem(String cartId, String item) throws CartNotFoundException {
+        Cart cart = this.findById(cartId);
+        if (cart == null){
+            throw new CartService.CartNotFoundException("Cart not found");
+        }
+        return cart.getItems().get(item);
+    }
 
     public class CartNotFoundException extends Throwable {
         public CartNotFoundException(String message) {

@@ -13,7 +13,7 @@ import java.util.Map;
 public class CartRecord {
     private String id;
     private String user;
-    private Map<Item,Integer> items;
+    private Map<String,Item> items;
 
     @DynamoDBHashKey(attributeName = "Id")
     public String getId() {
@@ -34,11 +34,11 @@ public class CartRecord {
     }
 
     @DynamoDBAttribute(attributeName = "Items")
-    public Map<Item,Integer> getItems() {
+    public Map<String,Item> getItems() {
         return items;
     }
 
-    public void setItems(Map<Item,Integer> items) {
+    public void setItems(Map<String,Item> items) {
         this.items = items;
     }
 

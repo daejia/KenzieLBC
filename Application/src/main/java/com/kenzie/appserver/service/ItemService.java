@@ -49,4 +49,16 @@ public class ItemService {
         return item;
     }
 
+    public void updateCartItem(Item item) {
+            ItemRecord itemRecord = new ItemRecord();
+            itemRecord.setId(item.getId());
+            itemRecord.setStore(item.getStore());
+            itemRecord.setBrandType(item.getBrandType());
+            itemRecord.setName(item.getName());
+            itemRecord.setCategory(item.getCategory());
+            itemRecord.setPrice(item.getPrice());
+            itemRecord.setInStock(item.getIsInStock());
+            itemRepository.save(itemRecord);
+        }
     }
+
