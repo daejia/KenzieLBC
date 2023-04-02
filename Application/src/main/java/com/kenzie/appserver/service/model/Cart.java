@@ -24,4 +24,7 @@ public class Cart {
     public Map<String,Item> getItems() {
         return items;
     }
+
+    public void setInStock(boolean b) {
+    }
 }

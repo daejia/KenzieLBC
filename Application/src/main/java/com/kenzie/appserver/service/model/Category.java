@@ -6,6 +6,7 @@ public enum Category {
     PET_SUPPLIES,
     CLEANING_SUPPLIES,
     BABY,
+    ELECTRONIC,
     FROZEN_FOOD,
     DAIRY,
     BAKERY,
