@@ -48,12 +48,6 @@ public class ItemController {
 
         return ResponseEntity.created(URI.create("/item/" + itemResponse.getId())).body(itemResponse);
     }
-    @GetMapping("/cart/{cartId}/items")
-    public List<Item> getAllCartItems(@PathVariable Long cartId) throws ItemService.CartNotFoundException {
-        List<Item> cartItems = itemService.getAllCartItems(cartId);
-        return cartItems;
-    }
-
     private ItemResponse createItemResponse(Item item) {
         ItemResponse itemResponse = new ItemResponse();
         itemResponse.setId(item.getId());
