@@ -1,13 +1,15 @@
 import BaseClass from "../util/baseClass";
 import DataStore from "../util/DataStore";
-import ProductSearchClient from "../api/productSearchClient";
+import ProductSearchClient from "../api/ProductSearchClient";
 
-
+/**
+ * Logic needed for the view playlist page of the website.
+ */
 class ProductSearchPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGet', 'onCreate', 'renderItem'], this);
+        this.bindClassMethods(['onGet', 'renderItem'], this);
         this.dataStore = new DataStore();
     }
 
@@ -16,12 +18,10 @@ class ProductSearchPage extends BaseClass {
      */
     async mount() {
         document.getElementById('get-by-id-form').addEventListener('submit', this.onGet);
-
         this.client = new ProductSearchClient();
 
         this.dataStore.addChangeListener(this.renderItem)
     }
-
 
     // Render Methods --------------------------------------------------------------------------------------------------
 
@@ -29,11 +29,21 @@ class ProductSearchPage extends BaseClass {
         let resultArea = document.getElementById("result-info");
 
         const item = this.dataStore.get("item");
+        item.inStock = undefined;
+        item.price = undefined;
+        item.category = undefined;
+        item.brandType = undefined;
+        item.store = undefined;
 
         if (item) {
             resultArea.innerHTML = `
                 <div>ID: ${item.id}</div>
+                <div>Store: ${item.store}</div>
+                <div>BrandType: ${item.brandType}</div>
                 <div>Name: ${item.name}</div>
+                <div>Category: ${item.category}</div>
+                <div>Price: ${item.price}</div>
+                <div>InStock: ${item.inStock}</div>
             `
         } else {
             resultArea.innerHTML = "No Item";
@@ -49,7 +59,9 @@ class ProductSearchPage extends BaseClass {
         let id = document.getElementById("id-field").value;
         this.dataStore.set("item", null);
 
+
         let result = await this.client.getCartItem(id, this.errorHandler);
+
         this.dataStore.set("item", result);
         if (result) {
             this.showMessage(`Got ${result.name}!`)
@@ -57,6 +69,7 @@ class ProductSearchPage extends BaseClass {
             this.errorHandler("Error doing GET!  Try again...");
         }
     }
+
     async onCreate(event) {
         // Prevent the page from refreshing on form submit
         event.preventDefault();
@@ -86,7 +99,7 @@ class ProductSearchPage extends BaseClass {
  */
 const main = async () => {
     const productSearchPage = new ProductSearchPage();
-    await productSearchPage.mount();
+    productSearchPage.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);
