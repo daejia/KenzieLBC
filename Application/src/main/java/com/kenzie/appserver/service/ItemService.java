@@ -24,6 +24,7 @@ public class ItemService {
 
         return itemFromBackend;
     }
+
     public Item addNewItem(Item item) {
         ItemRecord itemRecord = new ItemRecord();
         itemRecord.setId(item.getId());
