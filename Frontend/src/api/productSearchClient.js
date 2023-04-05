@@ -11,7 +11,7 @@ export default class ProductSearchClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['clientLoaded', 'getCartItem'];
+        const methodsToBind = ['clientLoaded', 'getCartItem', 'createItem'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);

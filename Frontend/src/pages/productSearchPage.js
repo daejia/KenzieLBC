@@ -9,7 +9,7 @@ class ProductSearchPage extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGet', 'renderItem'], this);
+        this.bindClassMethods(['onGet', 'onCreate', 'renderItem'], this);
         this.dataStore = new DataStore();
     }
 
@@ -29,11 +29,6 @@ class ProductSearchPage extends BaseClass {
         let resultArea = document.getElementById("result-info");
 
         const item = this.dataStore.get("item");
-        item.inStock = undefined;
-        item.price = undefined;
-        item.category = undefined;
-        item.brandType = undefined;
-        item.store = undefined;
 
         if (item) {
             resultArea.innerHTML = `
@@ -91,7 +86,6 @@ class ProductSearchPage extends BaseClass {
             this.errorHandler("Error creating!  Try again...");
         }
     }
-
 }
 
 /**
