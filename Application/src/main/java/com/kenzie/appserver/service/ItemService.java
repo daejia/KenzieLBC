@@ -22,8 +22,8 @@ public class ItemService {
 
         return itemFromBackend;
     }
-
-    public void updateCartItem(Item item) {
+    
+    public Item updateCartItem(Item item) {
             ItemRecord itemRecord = new ItemRecord();
             itemRecord.setId(item.getId());
             itemRecord.setStore(item.getStore());
@@ -33,8 +33,9 @@ public class ItemService {
             itemRecord.setPrice(item.getPrice());
             itemRecord.setInStock(item.getIsInStock());
             itemRepository.save(itemRecord);
-
+            return updateCartItem(item);
     }
+
     public Item addNewItem(Item item) {
         ItemRecord itemRecord = new ItemRecord();
         itemRecord.setId(item.getId());
