@@ -6,11 +6,13 @@ public class Cart {
     private final String id;
     private final String user;
     private final Map<String,Item> items;
+    private final Boolean isInStock;
 
-    public Cart(String id, String user, Map<String, Item> items) {
+    public Cart(String id, String user, Map<String, Item> items, Boolean isInStock) {
         this.id = id;
         this.user = user;
         this.items = items;
+        this.isInStock = isInStock;
     }
 
     public String getId() {
@@ -25,6 +27,7 @@ public class Cart {
         return items;
     }
 
-    public void setInStock(boolean b) {
+    public Boolean getIsInStock(boolean b) {
+        return isInStock;
     }
 }
