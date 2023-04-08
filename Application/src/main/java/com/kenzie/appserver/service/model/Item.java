@@ -34,12 +34,15 @@ public class Item {
     public String getName() {
         return name;
     }
+
     public Category getCategory() {
         return category;
     }
+
     public double getPrice() {
         return price;
     }
+
     public boolean getIsInStock() {return isInStock;
     }
 }

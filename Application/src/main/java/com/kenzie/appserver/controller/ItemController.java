@@ -1,17 +1,14 @@
 package com.kenzie.appserver.controller;
 
 
-import com.kenzie.appserver.controller.model.ExampleResponse;
 import com.kenzie.appserver.controller.model.ItemCreateRequest;
 import com.kenzie.appserver.controller.model.ItemResponse;
 import com.kenzie.appserver.service.ItemService;
-import com.kenzie.appserver.service.model.Example;
 import com.kenzie.appserver.service.model.Item;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 import static java.util.UUID.randomUUID;
 
@@ -25,7 +22,7 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ItemResponse> get(@PathVariable("id") String id) {
+    public ResponseEntity<ItemResponse> getCartItem(@PathVariable("id") String id) {
 
         Item item = itemService.findById(id);
         if (item == null) {
@@ -48,12 +45,6 @@ public class ItemController {
 
         return ResponseEntity.created(URI.create("/item/" + itemResponse.getId())).body(itemResponse);
     }
-    @GetMapping("/cart/{cartId}/items")
-    public List<Item> getAllCartItems(@PathVariable Long cartId) throws ItemService.CartNotFoundException {
-        List<Item> cartItems = itemService.getAllCartItems(cartId);
-        return cartItems;
-    }
-
     private ItemResponse createItemResponse(Item item) {
         ItemResponse itemResponse = new ItemResponse();
         itemResponse.setId(item.getId());

@@ -1,12 +1,10 @@
 package com.kenzie.appserver.controller;
 
-import com.kenzie.appserver.IntegrationTest;
-import com.kenzie.appserver.controller.model.ExampleCreateRequest;
-import com.kenzie.appserver.service.ExampleService;
-import com.kenzie.appserver.service.model.Example;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.kenzie.appserver.service.ExampleService;
+import com.kenzie.appserver.service.ItemService;
+import com.kenzie.appserver.service.StoreService;
+import com.kenzie.appserver.service.model.Example;
 import net.andreinc.mockneat.MockNeat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +15,10 @@ import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-@IntegrationTest
-class ExampleControllerTest {
+public class StoreControllerTest {
     @Autowired
     private MockMvc mvc;
 
@@ -35,9 +30,14 @@ class ExampleControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void getById_Exists() throws Exception {
+    public void getById_Store() throws Exception {
         String id = UUID.randomUUID().toString();
         String name = mockNeat.strings().valStr();
+        String address = mockNeat.addresses().valStr();
+        String city = mockNeat.cities().us().valStr();
+        String state = mockNeat.usStates().valStr();
+        String zip = UUID.randomUUID().toString();
+
 
         Example example = new Example(id, name);
         Example persistedExample = exampleService.addNewExample(example);
@@ -48,25 +48,5 @@ class ExampleControllerTest {
                 .andExpect(jsonPath("name")
                         .value(is(name)))
                 .andExpect(status().isOk());
-    }
-
-    @Test
-    public void getAllCartItems_GetSuccessful() throws Exception {
-        String name = mockNeat.strings().valStr();
-
-        ExampleCreateRequest exampleCreateRequest = new ExampleCreateRequest();
-        exampleCreateRequest.setName(name);
-
-        mapper.registerModule(new JavaTimeModule());
-
-        mvc.perform(post("/example")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(exampleCreateRequest)))
-                .andExpect(jsonPath("id")
-                        .exists())
-                .andExpect(jsonPath("name")
-                        .value(is(name)))
-                .andExpect(status().isCreated());
     }
 }
