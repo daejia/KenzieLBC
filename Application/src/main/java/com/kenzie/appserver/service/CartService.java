@@ -62,18 +62,6 @@ public class CartService {
         return cart.getItems().get(item);
     }
 
-    public boolean updateCartItem(String itemId, Integer itemsUpdate) {
-        Optional<Item> itemOptional = ItemRepository.findById(itemId);
-        if (itemOptional.isPresent()) {
-            Item item = itemOptional.get();
-            item.setQuantity(newQuantity);
-            ItemRepository.save(item);
-            return true;
-        } else {
-            return false;
-        }
-
-    }
 
     public class CartNotFoundException extends Throwable {
         public CartNotFoundException(String message) {
