@@ -9,6 +9,4 @@ import java.util.List;
 
 @EnableScan
 public interface CartRepository extends CrudRepository<CartRecord, String> {
- //   List<Cart> findByCartId(Long cartId);
-
 }

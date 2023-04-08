@@ -5,8 +5,6 @@ import com.kenzie.appserver.repositories.model.ItemRecord;
 import com.kenzie.appserver.service.model.Item;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ItemService {
     private ItemRepository itemRepository;
@@ -38,16 +36,5 @@ public class ItemService {
         return item;
     }
 
-    public void updateCartItem(Item item) {
-            ItemRecord itemRecord = new ItemRecord();
-            itemRecord.setId(item.getId());
-            itemRecord.setStore(item.getStore());
-            itemRecord.setBrandType(item.getBrandType());
-            itemRecord.setName(item.getName());
-            itemRecord.setCategory(item.getCategory());
-            itemRecord.setPrice(item.getPrice());
-            itemRecord.setInStock(item.getIsInStock());
-            itemRepository.save(itemRecord);
-        }
     }
 
