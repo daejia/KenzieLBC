@@ -1,10 +1,12 @@
 package com.kenzie.appserver.controller;
 
 
+import com.kenzie.appserver.controller.model.CartResponse;
 import com.kenzie.appserver.controller.model.ItemCreateRequest;
 import com.kenzie.appserver.controller.model.ItemResponse;
 import com.kenzie.appserver.service.ItemService;
 import com.kenzie.appserver.service.model.Item;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +47,7 @@ public class ItemController {
 
         return ResponseEntity.created(URI.create("/item/" + itemResponse.getId())).body(itemResponse);
     }
+
     private ItemResponse createItemResponse(Item item) {
         ItemResponse itemResponse = new ItemResponse();
         itemResponse.setId(item.getId());
@@ -56,4 +59,6 @@ public class ItemController {
         itemResponse.setIsInStock(item.getIsInStock());
         return itemResponse;
     }
+
+
 }
