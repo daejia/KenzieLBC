@@ -62,7 +62,6 @@ public class CartService {
         return cart.getItems().get(item);
     }
 
-
     public class CartNotFoundException extends Throwable {
         public CartNotFoundException(String message) {
             super(message);
