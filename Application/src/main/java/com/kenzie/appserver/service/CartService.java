@@ -1,6 +1,7 @@
 package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.CartRepository;
+import com.kenzie.appserver.repositories.ItemRepository;
 import com.kenzie.appserver.repositories.model.CartRecord;
 import com.kenzie.appserver.service.model.Cart;
 import com.kenzie.appserver.service.model.Item;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CartService {
@@ -22,7 +24,7 @@ public class CartService {
     public Cart findById(String id) {
         Cart cartFromBackend = cartRepository
                 .findById(id)
-                .map(cart -> new Cart(cart.getId(), cart.getUser(), cart.getItems()))
+                .map(cart -> new Cart(cart.getId(), cart.getUser(), cart.getItems(), cart.getIsInStock()))
                 .orElse(null);
 
         return cartFromBackend;
