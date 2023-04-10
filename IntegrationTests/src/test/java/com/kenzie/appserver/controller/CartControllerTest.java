@@ -2,6 +2,7 @@ package com.kenzie.appserver.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.kenzie.appserver.IntegrationTest;
 import com.kenzie.appserver.controller.model.ExampleCreateRequest;
 import com.kenzie.appserver.service.CartService;
 import com.kenzie.appserver.service.ExampleService;
@@ -15,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@IntegrationTest
 public class CartControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -39,7 +42,7 @@ public class CartControllerTest {
     public void getById_Exists() throws Exception {
         String id = UUID.randomUUID().toString();
         String user = mockNeat.strings().valStr();
-        Map<String, Item> itemMap = new HashMap<>();
+        Map<Item, Integer> itemMap = new HashMap<>();
 
         Cart cart = new Cart(id,user,itemMap);
         Cart persistedCart = cartService.addNewCart(cart);
@@ -54,23 +57,23 @@ public class CartControllerTest {
     }
 
     @Test
-    public void getAllCartItems_GetSuccessful() throws Exception {
-        String name = mockNeat.strings().valStr();
+    public void getAllCartItems_GetSuccessful() throws Exception, CartService.CartNotFoundException {
+        String id = UUID.randomUUID().toString();
+        String user = mockNeat.strings().valStr();
+        Map<Item, Integer> itemMap = new HashMap<>();
 
-        ExampleCreateRequest exampleCreateRequest = new ExampleCreateRequest();
-        exampleCreateRequest.setName(name);
+        Cart cart = new Cart(id,user,itemMap);
+        Cart addedCart = cartService.addNewCart(cart);
 
-        mapper.registerModule(new JavaTimeModule());
+        Cart secondCart = new Cart(id, mockNeat.strings().valStr(), itemMap);
+        Cart cart2 = cartService.addNewCart(secondCart);
 
-        mvc.perform(post("/example")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(exampleCreateRequest)))
+        List<Cart> cartList = cartService.getAllCartItems(Long.getLong(id));
+
+        mvc.perform(get("/cart/{cartId}/items", addedCart.getId())
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("id")
-                        .exists())
-                .andExpect(jsonPath("name")
-                        .value(is(name)))
-                .andExpect(status().isCreated());
+                        .value(is(id)))
+                .andExpect(status().isOk());
     }
-}
 }

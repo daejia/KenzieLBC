@@ -5,10 +5,10 @@ import java.util.Map;
 public class Cart {
     private final String id;
     private final String user;
-    private final Map<String,Item> items;
+    private final Map<Item,Integer> items
     private final Boolean isInStock;
-
-    public Cart(String id, String user, Map<String, Item> items, Boolean isInStock) {
+    
+    public Cart(String id, String user, Map<Item, Integer> items) {
         this.id = id;
         this.user = user;
         this.items = items;
@@ -23,7 +23,7 @@ public class Cart {
         return user;
     }
 
-    public Map<String,Item> getItems() {
+    public Map<Item,Integer> getItems() {
         return items;
     }
 

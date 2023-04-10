@@ -10,7 +10,7 @@ public class CartCreateRequest {
     @NotEmpty
     @JsonProperty("user")
     private String user;
-    private Map<String, Item> items;
+    private Map<Item, Integer> items;
 
     public String getUser() {
         return user;
@@ -20,11 +20,11 @@ public class CartCreateRequest {
         this.user = user;
     }
 
-    public Map<String, Item> getItems() {
+    public Map<Item, Integer> getItems() {
         return items;
     }
 
-    public void setItems(Map<String, Item> items) {
+    public void setItems(Map<Item, Integer> items) {
         this.items = items;
     }
 
