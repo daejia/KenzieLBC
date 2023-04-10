@@ -5,8 +5,6 @@ import com.kenzie.appserver.repositories.model.ItemRecord;
 import com.kenzie.appserver.service.model.Item;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ItemService {
     private ItemRepository itemRepository;
@@ -24,6 +22,7 @@ public class ItemService {
 
         return itemFromBackend;
     }
+
     public Item addNewItem(Item item) {
         ItemRecord itemRecord = new ItemRecord();
         itemRecord.setId(item.getId());
@@ -38,3 +37,4 @@ public class ItemService {
     }
 
     }
+

@@ -27,4 +27,8 @@ public class CartCreateRequest {
     public void setItems(Map<Item, Integer> items) {
         this.items = items;
     }
+
+    public Boolean getIsInStock() {
+        return true;
+    }
 }

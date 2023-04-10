@@ -54,4 +54,8 @@ public class CartRecord {
     public int hashCode() {
         return Objects.hashCode(id, user, items);
     }
+
+    public Boolean getIsInStock() {
+        return true;
+    }
 }
