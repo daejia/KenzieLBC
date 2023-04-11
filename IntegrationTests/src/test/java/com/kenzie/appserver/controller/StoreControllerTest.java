@@ -2,9 +2,8 @@ package com.kenzie.appserver.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kenzie.appserver.service.ExampleService;
-import com.kenzie.appserver.service.ItemService;
-import com.kenzie.appserver.service.StoreService;
 import com.kenzie.appserver.service.model.Example;
+import com.kenzie.appserver.service.model.Store;
 import net.andreinc.mockneat.MockNeat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +22,15 @@ public class StoreControllerTest {
     private MockMvc mvc;
 
     @Autowired
-    ExampleService exampleService;
+    ExampleService storeService;
 
     private final MockNeat mockNeat = MockNeat.threadLocal();
 
     private final ObjectMapper mapper = new ObjectMapper();
 
+
     @Test
-    public void getById_Store() throws Exception {
+    public void getById_Exists() throws Exception {
         String id = UUID.randomUUID().toString();
         String name = mockNeat.strings().valStr();
         String address = mockNeat.addresses().valStr();
@@ -38,15 +38,25 @@ public class StoreControllerTest {
         String state = mockNeat.usStates().valStr();
         String zip = UUID.randomUUID().toString();
 
+        Store store = new Store(id, name, address, city, state, zip, true);
+        Example presistedStore = storeService.findById(id);
 
-        Example example = new Example(id, name);
-        Example persistedExample = exampleService.addNewExample(example);
-        mvc.perform(get("/example/{id}", persistedExample.getId())
+
+        mvc.perform(get("/store/{id}", presistedStore.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("id")
                         .value(is(id)))
                 .andExpect(jsonPath("name")
                         .value(is(name)))
+                .andExpect(jsonPath("address")
+                        .value(is(address)))
+                .andExpect(jsonPath("city")
+                        .value(is(city)))
+                .andExpect(jsonPath("state")
+                        .value(is(state)))
+                .andExpect(jsonPath("zip")
+                        .value(is(zip)))
                 .andExpect(status().isOk());
+
     }
 }
