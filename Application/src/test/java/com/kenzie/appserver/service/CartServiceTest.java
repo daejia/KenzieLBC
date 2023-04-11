@@ -101,7 +101,8 @@ public class CartServiceTest {
         Item boomBox = new Item(UUID.randomUUID().toString(), wholeMoods, BrandType.NAME_BRAND, "boomBox", Category.ELECTRONIC, 11, true);
         items.put("television", television);
         items.put("boomBox", boomBox);
-        Cart cart = new Cart(id, user, items);
+        Boolean isInStock = true;
+        Cart cart = new Cart(id, user, items, isInStock);
         CartRecord cartRecord = new CartRecord();
         cartRecord.setItems(items);
         cartRecord.setId(id);
