@@ -13,7 +13,7 @@ import java.util.Map;
 public class CartRecord {
     private String id;
     private String user;
-    private Map<Item,Integer> items;
+    private Map<Item, Integer> items;
 
     @DynamoDBHashKey(attributeName = "Id")
     public String getId() {
@@ -53,5 +53,9 @@ public class CartRecord {
     @Override
     public int hashCode() {
         return Objects.hashCode(id, user, items);
+    }
+
+    public Boolean getIsInStock() {
+        return true;
     }
 }

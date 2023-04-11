@@ -11,7 +11,7 @@ export default class ProductSearchClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['clientLoaded', 'getCartItem'];
+        const methodsToBind = ['clientLoaded', 'getCartItem', 'createItem'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -34,7 +34,7 @@ export default class ProductSearchClient extends BaseClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The item
      */
-    async getItem(id, errorCallback) {
+    async getCartItem(id, errorCallback) {
         try {
             const response = await this.client.get(`/item/${id}`);
             return response.data;
@@ -42,7 +42,16 @@ export default class ProductSearchClient extends BaseClass {
             this.handleError("getCartItem", error, errorCallback)
         }
     }
-
+    async createItem(name, errorCallback) {
+        try {
+            const response = await this.client.post(`item`, {
+                name: name
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError("createItem", error, errorCallback);
+        }
+    }
 
     /**
      * Helper method to log the error and run any error functions.

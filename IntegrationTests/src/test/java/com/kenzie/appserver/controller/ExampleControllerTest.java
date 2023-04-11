@@ -51,7 +51,7 @@ class ExampleControllerTest {
     }
 
     @Test
-    public void createExample_CreateSuccessful() throws Exception {
+    public void getAllCartItems_GetSuccessful() throws Exception {
         String name = mockNeat.strings().valStr();
 
         ExampleCreateRequest exampleCreateRequest = new ExampleCreateRequest();

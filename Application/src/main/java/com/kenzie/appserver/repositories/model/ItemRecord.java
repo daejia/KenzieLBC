@@ -2,12 +2,13 @@ package com.kenzie.appserver.repositories.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.google.common.base.Objects;
 import com.kenzie.appserver.service.model.BrandType;
 import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.Store;
 
+@DynamoDBTable(tableName="Item")
 public class ItemRecord {
     private String id;
     private Store store;
@@ -26,7 +27,7 @@ public class ItemRecord {
         this.id = id;
     }
 
-    @DynamoDBRangeKey(attributeName = "Store")
+    @DynamoDBAttribute(attributeName = "Store")
     public Store getStore() {
         return store;
     }
