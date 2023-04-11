@@ -42,10 +42,15 @@ export default class ProductSearchClient extends BaseClass {
             this.handleError("getCartItem", error, errorCallback)
         }
     }
-    async createItem(name, errorCallback) {
+    async createItem(name, store, brandType, category, price, isInStock, errorCallback) {
         try {
             const response = await this.client.post(`item`, {
-                name: name
+                name: name,
+                store: store,
+                brandType: brandType,
+                category: category,
+                price: price,
+                isInStock: isInStock
             });
             return response.data;
         } catch (error) {

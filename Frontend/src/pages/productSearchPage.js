@@ -63,12 +63,17 @@ class ProductSearchPage extends BaseClass {
         this.dataStore.set("item", null);
 
         let name = document.getElementById("create-name-field").value;
+        let store = document.getElementById("create-store-field").value;
+        let brandType = document.getElementById("create-brand-type-field").value;
+        let category = document.getElementById("create-category-field").value;
+        let price = document.getElementById("create-price-field").value;
+        let isInStock = document.getElementById("create-in-stock-field").value;
 
-        const createdExample = await this.client.createItem(name, this.errorHandler);
-        this.dataStore.set("item", createdExample);
+        const createdItem = await this.client.createItem(name, store, brandType, category, price, isInStock, this.errorHandler);
+        this.dataStore.set("item", createdItem);
 
-        if (createdExample) {
-            this.showMessage(`Created ${createdExample.name}!`)
+        if (createdItem) {
+            this.showMessage(`Created ${createdItem.name}!`)
         } else {
             this.errorHandler("Error creating!  Try again...");
         }
