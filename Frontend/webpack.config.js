@@ -10,6 +10,7 @@ module.exports = {
   entry: {
     examplePage: path.resolve(__dirname, 'src', 'pages', 'examplePage.js'),
     productSearch: path.resolve(__dirname, 'src', 'pages', 'productSearchPage.js'),
+    checkoutPage: path.resolve(__dirname, 'src', 'pages', 'checkoutPage.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
