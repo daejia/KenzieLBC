@@ -34,7 +34,7 @@ export default class ProductSearchClient extends BaseClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The item
      */
-    async getItem(id, errorCallback) {
+    async getCartItem(id, errorCallback) {
         try {
             const response = await this.client.get(`/item/${id}`);
             return response.data;
