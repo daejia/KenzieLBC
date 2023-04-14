@@ -36,7 +36,6 @@ class StoreServiceTest {
         storeRecord.setCity("storecity");
         storeRecord.setState("storestate");
         storeRecord.setZip("12345");
-        storeRecord.setIsInRadius(true);
 
         //WHEN
         when(storeRepository.findById(id)).thenReturn(Optional.of(storeRecord));
@@ -50,7 +49,7 @@ class StoreServiceTest {
         assertEquals(storeRecord.getCity(), store.getCity(), "The city matches");
         assertEquals(storeRecord.getState(), store.getState(), "The state matches");
         assertEquals(storeRecord.getZip(), store.getZip(), "The zip matches");
-        assertEquals(storeRecord.isInRadius(), store.isInRadius(), "The the radius matches");
+
     }
 
     @Test
@@ -76,7 +75,6 @@ class StoreServiceTest {
         storeRecord.setCity("storecity");
         storeRecord.setState("storestate");
         storeRecord.setZip("12345");
-        storeRecord.setIsInRadius(true);
 
         String id2 = randomUUID().toString();
         StoreRecord storeRecord2 = new StoreRecord();
@@ -86,7 +84,6 @@ class StoreServiceTest {
         storeRecord2.setCity("storecity2");
         storeRecord2.setState("storestate2");
         storeRecord2.setZip("12342");
-        storeRecord2.setIsInRadius(true);
 
         List<StoreRecord> storeRecords = new ArrayList<>();
         storeRecords.add(storeRecord);
@@ -112,10 +109,9 @@ class StoreServiceTest {
         storeRecord.setCity("storecity");
         storeRecord.setState("storestate");
         storeRecord.setZip("12345");
-        storeRecord.setIsInRadius(true);
 
         Store store = new Store(storeRecord.getId(), storeRecord.getName(), storeRecord.getAddress(),
-                storeRecord.getCity(), storeRecord.getState(), storeRecord.getZip(), storeRecord.isInRadius());
+                storeRecord.getCity(), storeRecord.getState(), storeRecord.getZip());
 
         //WHEN
         when(storeRepository.save(storeRecord)).thenReturn(storeRecord);
@@ -129,6 +125,5 @@ class StoreServiceTest {
         assertEquals(storeRecord.getCity(), newStore.getCity(), "The city matches");
         assertEquals(storeRecord.getState(), newStore.getState(), "The state matches");
         assertEquals(storeRecord.getZip(), newStore.getZip(), "The zip matches");
-        assertEquals(storeRecord.isInRadius(), newStore.isInRadius(), "The the radius matches");
     }
 }
