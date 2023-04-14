@@ -41,7 +41,7 @@ public class CartController {
     }
 
     @GetMapping("/{cartId}/items")
-    public List<Item> getAllCartItems(@PathVariable String cartId) throws CartNotFoundException {
+    public List<Item> getAllCartItems(@PathVariable String cartId) throws CartNotFoundException, CartService.CartNotFoundException {
         List<Item> cartItems = cartService.getAllCartItems(cartId);
         return cartItems;
     }

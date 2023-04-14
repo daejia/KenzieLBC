@@ -54,6 +54,7 @@ public class CartService {
         return items;
     }
 
+<<<<<<< Updated upstream
 //    public Item getCartItem(String cartId, String item) throws CartNotFoundException {
 //        Cart cart = this.findById(cartId);
 //        if (cart == null){
@@ -62,4 +63,25 @@ public class CartService {
 //        return cart.getItems();
 //    }
 
+<<<<<<< Updated upstream
+=======
+=======
+    public Item getCartItem(String cartId, String item) throws CartNotFoundException {
+        Cart cart = this.findById(cartId);
+        if (cart == null){
+            throw new CartService.CartNotFoundException("Cart not found");
+        }
+        return cart.getItems().get(item);
+    }
+
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+    public class CartNotFoundException extends Throwable {
+        public CartNotFoundException(String message) {
+            super(message);
+        }
+    }
+>>>>>>> Stashed changes
 }
