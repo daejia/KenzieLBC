@@ -18,9 +18,13 @@ class ProductSearchPage extends BaseClass {
      */
     async mount() {
         document.getElementById('get-by-id-form').addEventListener('submit', this.onGet);
-        this.client = new ProductSearchClient();
+        document.getElementById('create-form').addEventListener('submit', this.onCreate);
 
         this.dataStore.addChangeListener(this.renderItem)
+
+        this.client = new ProductSearchClient();
+        const item = await this.client.getCartItem(this.errorHandler);
+        this.dataStore.set("item", item);
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
@@ -38,7 +42,7 @@ class ProductSearchPage extends BaseClass {
                 <div>Name: ${item.name}</div>
                 <div>Category: ${item.category}</div>
                 <div>Price: ${item.price}</div>
-                <div>InStock: ${item.inStock}</div>
+                <div>isInStock: ${item.isInStock}</div>
             `
         } else {
             resultArea.innerHTML = "No Item";
@@ -77,7 +81,7 @@ class ProductSearchPage extends BaseClass {
         let price = document.getElementById("create-price-field").value;
         let isInStock = document.getElementById("create-in-stock-field").value;
 
-        const createdItem = await this.client.createItem(name, store, brandType, category, price, isInStock, this.errorHandler);
+        const createdItem = await this.client.addNewItem(name, store, brandType, category, price, isInStock, this.errorHandler);
         this.dataStore.set("item", createdItem);
 
         if (createdItem) {
@@ -93,7 +97,7 @@ class ProductSearchPage extends BaseClass {
  */
 const main = async () => {
     const productSearchPage = new ProductSearchPage();
-    productSearchPage.mount();
+    await productSearchPage.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);
