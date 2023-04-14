@@ -1,6 +1,6 @@
 import BaseClass from "../util/baseClass";
 import DataStore from "../util/DataStore";
-import ProductSearchClient from "../api/ProductSearchClient";
+import ProductSearchClient from "../api/productSearchClient";
 
 /**
  * Logic needed for the view playlist page of the website.
@@ -37,13 +37,7 @@ class ProductSearchPage extends BaseClass {
         if (item) {
             resultArea.innerHTML = `
                 <div>ID: ${item.id}</div>
-                <div>Store: ${item.store}</div>
-                <div>BrandType: ${item.brandType}</div>
-                <div>Name: ${item.name}</div>
-                <div>Category: ${item.category}</div>
-                <div>Price: ${item.price}</div>
-                <div>isInStock: ${item.isInStock}</div>
-            `
+              `
         } else {
             resultArea.innerHTML = "No Item";
         }

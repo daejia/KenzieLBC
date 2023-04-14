@@ -43,12 +43,13 @@ export default class ProductSearchClient extends BaseClass {
         }
     }
 
-    async addNewItem(name, store, brandType, category, price, isInStock, errorCallback) {
+    async addNewItem(id, store, brandType, name, category, price, isInStock, errorCallback) {
         try {
             const response = await this.client.post(`item`, {
-                name: name,
+                id: id,
                 store: store,
                 brandType: brandType,
+                name: name,
                 category: category,
                 price: price,
                 isInStock: isInStock
