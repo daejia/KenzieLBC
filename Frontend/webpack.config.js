@@ -10,6 +10,7 @@ module.exports = {
   entry: {
     examplePage: path.resolve(__dirname, 'src', 'pages', 'examplePage.js'),
     productSearch: path.resolve(__dirname, 'src', 'pages', 'productSearchPage.js'),
+    checkoutPage: path.resolve(__dirname, 'src', 'pages', 'checkoutPage.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -20,7 +21,7 @@ module.exports = {
     port: 8080,
     open: true,
     openPage: 'http://localhost:8080',
-    // diableHostChecks, otherwise we get an error about headers and the page won't render
+    // disableHostChecks, otherwise we get an error about headers and the page won't render
     disableHostCheck: true,
     contentBase: 'packaging_additional_published_artifacts',
     // overlay shows a full-screen overlay in the browser when there are compiler errors or warnings
@@ -35,6 +36,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/productSearch.html',
       filename: 'productSearch.html',
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/checkoutPage.html',
+      filename: 'checkoutPage.html',
       inject: false
     }),
     new CopyPlugin({

@@ -14,9 +14,10 @@ import org.mockito.Mockito;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static java.util.UUID.randomUUID;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CartServiceTest {
     private CartRepository cartRepository;
@@ -35,8 +36,9 @@ public class CartServiceTest {
         //GIVEN
         String id = randomUUID().toString();
         String user = "user";
+        Boolean isInStock = true;
         Map<Item, Integer> items = new HashMap<>();
-        Cart cart = new Cart(id, user, items);
+        Cart cart = new Cart(id, user, items, isInStock);
 
         CartRecord cartRecord = new CartRecord();
         cartRecord.setId(cart.getId());
@@ -73,8 +75,9 @@ public class CartServiceTest {
         //GIVEN
         String id = randomUUID().toString();
         String user = "user";
+        Boolean isInStock = true;
         Map<Item, Integer> items = new HashMap<>();
-        Cart cart = new Cart(id, user, items);
+        Cart cart = new Cart(id, user, items, isInStock);
 
         CartRecord cartRecord = new CartRecord();
         cartRecord.setId(cart.getId());
@@ -91,22 +94,24 @@ public class CartServiceTest {
         assertEquals(cartRecord.getId(), addedCart.getId(), "The id matches");
         assertEquals(cartRecord.getUser(), addedCart.getUser(), "The users match");
         assertEquals(cartRecord.getItems(), addedCart.getItems(), "The items match");
-
-    public void testGetAllCartItems() throws CartService.CartNotFoundException {
-        String id = UUID.randomUUID().toString();
+    }
+@Test
+    public void testGetAllCartItems() throws CartNotFoundException {
+        String id = randomUUID().toString();
         String user = "Maya";
-        Map<String, Item> items = new HashMap<>();
-        Store wholeMoods = new Store(UUID.randomUUID().toString(), "wholeMoods", "423 WallabyWay", "Sydney", "Australia", "66666", true);
-        Item television = new Item(UUID.randomUUID().toString(), wholeMoods, BrandType.NAME_BRAND, "television", Category.ELECTRONIC, 17.38, true);
-        Item boomBox = new Item(UUID.randomUUID().toString(), wholeMoods, BrandType.NAME_BRAND, "boomBox", Category.ELECTRONIC, 11, true);
-        items.put("television", television);
-        items.put("boomBox", boomBox);
-        Cart cart = new Cart(id, user, items);
+        Map<Item, Integer> items = new HashMap<>();
+        Store wholeMoods = new Store(randomUUID().toString(), "wholeMoods", "423 WallabyWay", "Sydney", "Australia", "66666", true);
+        Item television = new Item(randomUUID().toString(), wholeMoods, BrandType.NAME_BRAND, "television", Category.ELECTRONIC, 17.38, true);
+        Item boomBox = new Item(randomUUID().toString(), wholeMoods, BrandType.NAME_BRAND, "boomBox", Category.ELECTRONIC, 11, true);
+        items.put(television, 1);
+        items.put(boomBox, 1);
+        Boolean isInStock = true;
+        Cart cart = new Cart(id, user, items, isInStock);
         CartRecord cartRecord = new CartRecord();
         cartRecord.setItems(items);
         cartRecord.setId(id);
         cartRecord.setUser(user);
-        Mockito.when(cartRepository.findById(id)).thenReturn(Optional.of(cartRecord));
+        when(cartRepository.findById(id)).thenReturn(Optional.of(cartRecord));
 
         List<Item> cartItems = cartService.getAllCartItems(id);
 

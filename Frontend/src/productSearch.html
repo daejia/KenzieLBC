@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="ProductSearchPage.js"></script>
+    <script type="text/javascript" src="productSearchPage.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body class="background">
 <header class="header" id="header">
     <div class="site-title">
-        <a class="header_home" href="index.html">Example App</a>
+        <a class="header_home" href="index.html">Product Search</a>
     </div>
     <div>
-        <a href="index.html">Go to Example Page</a>
+        <a href="index.html">Back to Home Page</a>
     </div>
 </header>
 <div class="card">
@@ -20,6 +20,38 @@
         <p class="form-field">
             <label>Name</label>
             <input type="text" required class="validated-field" id="create-name-field">
+            <label>Store</label>
+            <input type="text" required class="validated-field" id="create-store-field">
+            <label for="create-brand-type-field">BrandType</label>
+            <select required class="validated-field" id="create-brand-type-field" name="brandType">
+                <option value="Generic">Generic</option>
+                <option value="Name Brand">Name Brand</option>
+            </select>
+            <label for="create-category-field">Category</label>
+            <select required class="validated-field" id="create-category-field" name="category">
+                <option value="Health and Beauty">Health and Beauty</option>
+                <option value="Home and Kitchen">Home and Kitchen</option>
+                <option value="Pet Supplies">Pet Supplies</option>
+                <option value="Cleaning Supplies">Cleaning Supplies</option>
+                <option value="Baby">Baby</option>
+                <option value="Electronic">Electronic</option>
+                <option value="Frozen Food">Frozen Food</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Meat">Meat</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Poultry">Poultry</option>
+                <option value="Pasta">Pasta</option>
+                <option value="Produce">Produce</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Other">Other</option>
+            </select>
+            <label>Price (USD)</label>
+            <input type="number" name="price" id="create-price-field" min="0" max="10000" required data-type="number">
+            <label>In Stock</label>
+            <select required class="validated-field" id="create-in-stock-field" name="isInStock">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
         </p>
         <button type="submit">Create</button>
     </form>
