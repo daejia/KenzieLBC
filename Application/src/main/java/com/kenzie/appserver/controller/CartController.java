@@ -4,6 +4,7 @@ package com.kenzie.appserver.controller;
 import com.kenzie.appserver.controller.model.CartCreateRequest;
 import com.kenzie.appserver.controller.model.CartResponse;
 import com.kenzie.appserver.controller.model.ItemResponse;
+import com.kenzie.appserver.service.CartNotFoundException;
 import com.kenzie.appserver.service.CartService;
 import com.kenzie.appserver.service.ItemService;
 import com.kenzie.appserver.service.model.Cart;
@@ -39,8 +40,8 @@ public class CartController {
         return ResponseEntity.ok(cartResponse);
     }
 
-    @GetMapping("/cart/{cartId}/items")
-    public List<Item> getAllCartItems(@PathVariable String cartId) throws CartService.CartNotFoundException {
+    @GetMapping("/{cartId}/items")
+    public List<Item> getAllCartItems(@PathVariable String cartId) throws CartNotFoundException {
         List<Item> cartItems = cartService.getAllCartItems(cartId);
         return cartItems;
     }
