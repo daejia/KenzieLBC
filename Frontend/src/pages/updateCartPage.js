@@ -1,11 +1,11 @@
 import BaseClass from "../util/baseClass";
 import DataStore from "../util/DataStore";
-import UpdateCart from "../api/updateItem";
+import UpdateCart from "../api/updateCartClient";
 
 /**
  * Logic needed for the update cart page of the website.
  */
-class UpdateCart extends BaseClass {
+class UpdateCartPage extends BaseClass {
 
     constructor() {
         super();
@@ -18,7 +18,7 @@ class UpdateCart extends BaseClass {
      */
     async mount() {
         document.getElementById('update-form').addEventListener('submit', this.onUpdate);
-        this.client = new ExampleClient();
+        this.client = new UpdateCartClient();
         this.dataStore.set("cart", {});
 
         this.dataStore.addChangeListener(this.renderCart);

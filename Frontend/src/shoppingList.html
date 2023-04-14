@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript" src="pages/UpdateCartPage.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
@@ -36,5 +37,13 @@
             document.getElementById("string-input").value = "";
         }
     </script>
+<div class="card">
+    <h1>Update List</h1>
+    <form class="card-content" id="update-form">
+        <label for="string-input">Enter items for your shopping list:</label><br>
+        <input type="text" name="string-input"><br>
+        <button type="submit">Update List</button>
+    </form>
+</div>
 </body>
 </html>
