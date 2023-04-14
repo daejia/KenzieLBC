@@ -52,12 +52,13 @@ public class CartService {
     }
 
 
-    public void updateCart(Cart cart) {
+    public Cart updateCart(Cart cart) {
         CartRecord cartRecord = new CartRecord();
         cartRecord.setId(cart.getId());
         cartRecord.setUser(cart.getUser());
         cartRecord.setItems(cart.getItems());
         cartRepository.save(cartRecord);
+        return cart;
     }
 
     public void deleteCart(String id) {
