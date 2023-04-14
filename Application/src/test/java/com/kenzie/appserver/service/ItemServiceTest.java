@@ -41,7 +41,6 @@ class ItemServiceTest {
         storeRecord.setCity("storecity");
         storeRecord.setState("storestate");
         storeRecord.setZip("12345");
-        storeRecord.setIsInRadius(true);
         Store store = storeService.findById(storeId);
 
         String itemId = randomUUID().toString();
@@ -91,7 +90,6 @@ class ItemServiceTest {
         storeRecord.setCity("storecity");
         storeRecord.setState("storestate");
         storeRecord.setZip("12345");
-        storeRecord.setIsInRadius(true);
         Store store = storeService.findById(storeId);
 
         String itemId = randomUUID().toString();
@@ -134,7 +132,6 @@ class ItemServiceTest {
         storeRecord.setCity("storecity");
         storeRecord.setState("storestate");
         storeRecord.setZip("12345");
-        storeRecord.setIsInRadius(true);
         Store store = storeService.findById(storeId);
 
         String itemId = randomUUID().toString();
@@ -195,7 +192,6 @@ class ItemServiceTest {
         storeRecord.setCity("storecity");
         storeRecord.setState("storestate");
         storeRecord.setZip("12345");
-        storeRecord.setIsInRadius(true);
         Store store = storeService.findById(storeId);
 
         String itemId = randomUUID().toString();

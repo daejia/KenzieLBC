@@ -20,7 +20,7 @@ public class StoreService {
         Store storeFromBackend = storeRepository
                 .findById(id)
                 .map(store -> new Store(store.getId(), store.getName(), store.getAddress(), store.getCity(),
-                        store.getState(), store.getZip(), store.isInRadius()))
+                        store.getState(), store.getZip()))
                 .orElse(null);
 
         return storeFromBackend;
@@ -34,7 +34,7 @@ public class StoreService {
         storeRecord.setCity(store.getCity());
         storeRecord.setState(store.getState());
         storeRecord.setZip(store.getZip());
-        storeRecord.setIsInRadius(store.isInRadius());
+//        storeRecord.setIsInRadius(store.isInRadius());
         storeRepository.save(storeRecord);
         return store;
     }
@@ -49,8 +49,7 @@ public class StoreService {
                     record.getAddress(),
                     record.getCity(),
                     record.getState(),
-                    record.getZip(),
-                    record.isInRadius()));
+                    record.getZip()));
         }
 
         return stores;

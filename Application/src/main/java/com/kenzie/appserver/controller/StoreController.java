@@ -51,7 +51,7 @@ public class StoreController {
     public ResponseEntity<StoreResponse> addNewStore(@RequestBody StoreCreateRequest storeCreateRequest) {
         Store store = new Store(randomUUID().toString(),
                 storeCreateRequest.getName(), storeCreateRequest.getAddress(), storeCreateRequest.getCity(),
-                storeCreateRequest.getState(), storeCreateRequest.getZip(), storeCreateRequest.getIsInRadius());
+                storeCreateRequest.getState(), storeCreateRequest.getZip());
         storeService.addNewStore(store);
 
         StoreResponse storeResponse = createStoreResponse(store);
@@ -67,7 +67,7 @@ public class StoreController {
         storeResponse.setCity(store.getCity());
         storeResponse.setState(store.getState());
         storeResponse.setZip(store.getZip());
-        storeResponse.setIsInRadius(store.isInRadius());
+//        storeResponse.setIsInRadius(store.isInRadius());
         return storeResponse;
     }
 }
