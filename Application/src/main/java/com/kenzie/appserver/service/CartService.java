@@ -1,17 +1,14 @@
 package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.CartRepository;
-import com.kenzie.appserver.repositories.ItemRepository;
 import com.kenzie.appserver.repositories.model.CartRecord;
 import com.kenzie.appserver.service.model.Cart;
 import com.kenzie.appserver.service.model.Item;
-import com.sun.tools.javac.jvm.Items;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
 
 @Service
 public class CartService {
@@ -54,12 +51,17 @@ public class CartService {
         return items;
     }
 
-//    public Item getCartItem(String cartId, String item) throws CartNotFoundException {
-//        Cart cart = this.findById(cartId);
-//        if (cart == null){
-//            throw new CartNotFoundException("Cart not found");
-//        }
-//        return cart.getItems();
-//    }
+
+    public void updateCart(Cart cart) {
+        CartRecord cartRecord = new CartRecord();
+        cartRecord.setId(cart.getId());
+        cartRecord.setUser(cart.getUser());
+        cartRecord.setItems(cart.getItems());
+        cartRepository.save(cartRecord);
+    }
+
+    public void deleteCart(String id) {
+        cartRepository.deleteById(id);
+    }
 
 }

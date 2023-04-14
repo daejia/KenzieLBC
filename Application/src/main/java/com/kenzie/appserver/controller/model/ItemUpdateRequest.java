@@ -8,7 +8,10 @@ import com.kenzie.appserver.service.model.Store;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
-public class ItemCreateRequest {
+public class ItemUpdateRequest {
+    @NotEmpty
+    @JsonProperty("id")
+    private String id;
     @NotEmpty
     @JsonProperty("name")
     private String name;
@@ -18,6 +21,14 @@ public class ItemCreateRequest {
     @Min(0)
     private double price;
     private boolean isInStock;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

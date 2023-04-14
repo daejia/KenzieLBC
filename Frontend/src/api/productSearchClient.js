@@ -11,7 +11,7 @@ export default class ProductSearchClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['clientLoaded', 'getCartItem', 'createItem'];
+        const methodsToBind = ['clientLoaded', 'getCartItem', 'addNewItem'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -43,19 +43,20 @@ export default class ProductSearchClient extends BaseClass {
         }
     }
 
-    async createItem(name, store, brandType, category, price, isInStock, errorCallback) {
+    async addNewItem(id, store, brandType, name, category, price, isInStock, errorCallback) {
         try {
             const response = await this.client.post(`item`, {
-                name: name,
+                id: id,
                 store: store,
                 brandType: brandType,
+                name: name,
                 category: category,
                 price: price,
                 isInStock: isInStock
             });
             return response.data;
         } catch (error) {
-            this.handleError("createItem", error, errorCallback);
+            this.handleError("addNewItem", error, errorCallback);
         }
     }
 
