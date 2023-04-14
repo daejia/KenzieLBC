@@ -3,12 +3,13 @@ package com.kenzie.appserver.repositories.model;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTyped;
 import com.google.common.base.Objects;
 import com.kenzie.appserver.service.model.Item;
 
 import java.util.List;
 import java.util.Map;
-
+@DynamoDBTyped
 @DynamoDBTable(tableName = "Cart")
 public class CartRecord {
     private String id;
@@ -33,6 +34,7 @@ public class CartRecord {
         this.user = user;
     }
 
+    @DynamoDBTyped
     @DynamoDBAttribute(attributeName = "Items")
     public Map<Item,Integer> getItems() {
         return items;
