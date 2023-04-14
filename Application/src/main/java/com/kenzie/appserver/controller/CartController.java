@@ -29,7 +29,6 @@ public class CartController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CartResponse> get(@PathVariable("id") String id) {
-
         Cart cart = cartService.findById(id);
         if (cart == null) {
             return ResponseEntity.notFound().build();

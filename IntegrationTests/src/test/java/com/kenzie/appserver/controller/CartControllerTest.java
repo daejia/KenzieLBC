@@ -59,24 +59,11 @@ public class CartControllerTest {
     }
 
     @Test
-    public void getAllCartItems_GetSuccessful() throws Exception, CartNotFoundException {
+    public void getById_NotFound() throws Exception {
         String id = UUID.randomUUID().toString();
-        String user = mockNeat.strings().valStr();
-        Boolean isInStock = true;
-        Map<Item, Integer> itemMap = new HashMap<>();
 
-        Cart cart = new Cart(id,user,itemMap, isInStock);
-        Cart addedCart = cartService.addNewCart(cart);
-
-        Cart secondCart = new Cart(id, mockNeat.strings().valStr(), itemMap, isInStock);
-        Cart cart2 = cartService.addNewCart(secondCart);
-
-//        List<Cart> cartList = cartService.getAllCartItems(id);
-
-        mvc.perform(get("/cart/{cartId}/items", addedCart.getId())
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("id")
-                        .value(is(id)))
-                .andExpect(status().isOk());
+        mvc.perform(get("/cart/{id}", id)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }
