@@ -68,7 +68,7 @@ public class CartController {
     }
 
     @PutMapping
-    public ResponseEntity<CartResponse> updateItem(@RequestBody CartUpdateRequest cartUpdateRequest) {
+    public ResponseEntity<CartResponse> updateCart(@RequestBody CartUpdateRequest cartUpdateRequest) {
         Cart cart = new Cart(cartUpdateRequest.getId(), cartUpdateRequest.getUser(), cartUpdateRequest.getItems(),
                 cartUpdateRequest.getIsInStock());
         cartService.updateCart(cart);

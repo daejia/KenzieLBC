@@ -11,6 +11,7 @@ module.exports = {
     examplePage: path.resolve(__dirname, 'src', 'pages', 'examplePage.js'),
     productSearch: path.resolve(__dirname, 'src', 'pages', 'productSearchPage.js'),
     checkoutPage: path.resolve(__dirname, 'src', 'pages', 'checkoutPage.js'),
+    UpdateCart: path.resolve(__dirname, 'src', 'pages', 'updateCartPage.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -41,6 +42,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/checkoutPage.html',
       filename: 'checkoutPage.html',
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/shoppingList.html',
+      filename: 'shoppingList.html',
       inject: false
     }),
     new CopyPlugin({
