@@ -31,7 +31,6 @@ public class CartServiceTest {
     }
 
     @Test
-
     void findById_validId_returnsCart(){
         //GIVEN
         String id = randomUUID().toString();
@@ -95,28 +94,31 @@ public class CartServiceTest {
         assertEquals(cartRecord.getUser(), addedCart.getUser(), "The users match");
         assertEquals(cartRecord.getItems(), addedCart.getItems(), "The items match");
     }
-@Test
-    public void testGetAllCartItems() throws CartNotFoundException {
+
+    @Test
+    void updateCart_isValid_updatesCart(){
+        //GIVEN
         String id = randomUUID().toString();
-        String user = "Maya";
-        Map<Item, Integer> items = new HashMap<>();
-        Store wholeMoods = new Store(randomUUID().toString(), "wholeMoods", "423 WallabyWay", "Sydney", "Australia", "66666", true);
-        Item television = new Item(randomUUID().toString(), wholeMoods, BrandType.NAME_BRAND, "television", Category.ELECTRONIC, 17.38, true);
-        Item boomBox = new Item(randomUUID().toString(), wholeMoods, BrandType.NAME_BRAND, "boomBox", Category.ELECTRONIC, 11, true);
-        items.put(television, 1);
-        items.put(boomBox, 1);
+        String user = "user";
         Boolean isInStock = true;
+        Map<Item, Integer> items = new HashMap<>();
         Cart cart = new Cart(id, user, items, isInStock);
+
         CartRecord cartRecord = new CartRecord();
-        cartRecord.setItems(items);
-        cartRecord.setId(id);
-        cartRecord.setUser(user);
+        cartRecord.setId(cart.getId());
+        cartRecord.setUser(cart.getUser());
+        cartRecord.setItems(cart.getItems());
+        cartRepository.save(cartRecord);
+
+        //WHEN
         when(cartRepository.findById(id)).thenReturn(Optional.of(cartRecord));
+        Cart updatedCart = cartService.updateCart(cart);
 
-        List<Item> cartItems = cartService.getAllCartItems(id);
+        //THEN
+        assertNotNull(updatedCart, "The cart is returned");
+        assertEquals(cartRecord.getId(), updatedCart.getId(), "The id matches");
+        assertEquals(cartRecord.getUser(), updatedCart.getUser(), "The users match");
+        assertEquals(cartRecord.getItems(), updatedCart.getItems(), "The items match");
 
-        assertEquals(2, cartItems.size());
-        assertTrue(cartItems.contains(television));
-        assertTrue(cartItems.contains(boomBox));
     }
 }

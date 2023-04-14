@@ -31,8 +31,9 @@ public class ItemService {
         return item;
     }
 
-    public void updateItem(Item item) {
+    public Item updateItem(Item item) {
         createItemRecord(item);
+        return item;
     }
 
     public static List<Item> findAllItems() {

@@ -42,8 +42,8 @@ public class StoreService {
     public List<Store> findAllStores() {
         List<Store> stores = new ArrayList<>();
 
-        Iterable<StoreRecord> concertIterator = storeRepository.findAll();
-        for (StoreRecord record : concertIterator) {
+        Iterable<StoreRecord> storeIterator = storeRepository.findAll();
+        for (StoreRecord record : storeIterator) {
             stores.add(new Store(record.getId(),
                     record.getName(),
                     record.getAddress(),
