@@ -19,7 +19,7 @@ public class ItemService {
     public Item findById(String id) {
         Item itemFromBackend = itemRepository
                 .findById(id)
-                .map(item -> new Item(item.getId(), item.getStore(), item.getBrandType(), item.getName(),item.getCategory(),
+                .map(item -> new Item(item.getId(), item.getStore(), item.getBrandType(), item.getName(), item.getCategory(),
                         item.getPrice(), item.isInStock()))
                 .orElse(null);
 
@@ -60,6 +60,5 @@ public class ItemService {
         itemRecord.setInStock(item.getIsInStock());
         itemRepository.save(itemRecord);
     }
-
 }
 
