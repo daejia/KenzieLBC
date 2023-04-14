@@ -5,6 +5,9 @@ import com.kenzie.appserver.repositories.model.ItemRecord;
 import com.kenzie.appserver.service.model.Item;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ItemService {
     private ItemRepository itemRepository;
@@ -16,7 +19,7 @@ public class ItemService {
     public Item findById(String id) {
         Item itemFromBackend = itemRepository
                 .findById(id)
-                .map(item -> new Item(item.getId(), item.getStore(), item.getBrandType(), item.getName(),item.getCategory(),
+                .map(item -> new Item(item.getId(), item.getStore(), item.getBrandType(), item.getName(), item.getCategory(),
                         item.getPrice(), item.isInStock()))
                 .orElse(null);
 
@@ -35,6 +38,5 @@ public class ItemService {
         itemRepository.save(itemRecord);
         return item;
     }
-
 }
 

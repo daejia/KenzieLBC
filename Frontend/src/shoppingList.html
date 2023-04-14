@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="background">
+<header class="header" id="header">
+    <div class="site-title">
+        <a class="header_home" href="index.html">Shopping List</a>
+    </div>
+    <div>
+        <a href="index.html">Back to Home Page</a>
+    </div>
+</header>
+    <h1>Shopping List</h1>
+    <form class="card-content" id="shopping-list-form">
+        <label for="string-input">Enter items for your shopping list:</label><br>
+        <input type="text" id="string-input" name="string-input"><br>
+        <button type="button" onclick="addString()">Add to List</button>
+    </form>
+    <div class="card">
+
+    </div>
+    <div>
+        <p>Shopping List:</p>
+        <ul id="string-list"></ul>
+    </div>
+    <script>
+        function addString() {
+            let input = document.getElementById("string-input").value;
+            let list = document.getElementById("string-list");
+            let item = document.createElement("li");
+            item.textContent = input;
+            list.appendChild(item);
+            document.getElementById("string-input").value = "";
+        }
+    </script>
+</body>
+</html>
