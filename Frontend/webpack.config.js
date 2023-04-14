@@ -38,6 +38,11 @@ module.exports = {
       filename: 'productSearch.html',
       inject: false
     }),
+    new HtmlWebpackPlugin({
+      template: './src/checkoutPage.html',
+      filename: 'checkoutPage.html',
+      inject: false
+    }),
     new CopyPlugin({
       patterns: [
         {
