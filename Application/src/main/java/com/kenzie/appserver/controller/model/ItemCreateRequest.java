@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kenzie.appserver.service.model.BrandType;
 import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.Store;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 public class ItemCreateRequest {
@@ -13,6 +15,7 @@ public class ItemCreateRequest {
     private Store store;
     private BrandType brandType;
     private Category category;
+    @Min(0)
     private double price;
     private boolean isInStock;
 

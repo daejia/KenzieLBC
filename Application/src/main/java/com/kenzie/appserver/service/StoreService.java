@@ -11,19 +11,22 @@ import java.util.List;
 @Service
 public class StoreService {
     private StoreRepository storeRepository;
-public StoreService (StoreRepository storeRepository) {
-    this.storeRepository = storeRepository;
-}
-public Store findById(String id) {
-    Store storeFromBackend = storeRepository
-            .findById(id)
-            .map(store -> new Store(store.getId(), store.getName(), store.getAddress(), store.getCity(),
-                    store.getState(), store.getZip(), store.isInRadius()))
-            .orElse(null);
 
-    return storeFromBackend;}
+    public StoreService(StoreRepository storeRepository) {
+        this.storeRepository = storeRepository;
+    }
 
-  public Store addNewStore(Store store) {
+    public Store findById(String id) {
+        Store storeFromBackend = storeRepository
+                .findById(id)
+                .map(store -> new Store(store.getId(), store.getName(), store.getAddress(), store.getCity(),
+                        store.getState(), store.getZip(), store.isInRadius()))
+                .orElse(null);
+
+        return storeFromBackend;
+    }
+
+    public Store addNewStore(Store store) {
         StoreRecord storeRecord = new StoreRecord();
         storeRecord.setId(store.getId());
         storeRecord.setName(store.getName());
@@ -40,7 +43,7 @@ public Store findById(String id) {
         List<Store> stores = new ArrayList<>();
 
         Iterable<StoreRecord> concertIterator = storeRepository.findAll();
-        for(StoreRecord record : concertIterator) {
+        for (StoreRecord record : concertIterator) {
             stores.add(new Store(record.getId(),
                     record.getName(),
                     record.getAddress(),
